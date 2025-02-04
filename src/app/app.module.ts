@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { CreateEmployeeComponent } from './create-employee/create-employee.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { CreateEmployeeComponent } from './components/create-employee/create-employee.component';
 import { FormsModule} from '@angular/forms';
-import { UpdateEmployeeComponent } from './update-employee/update-employee.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component'
+import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component'
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,14 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG, 
+      serverLogLevel: NgxLoggerLevel.ERROR, 
+      serverLoggingUrl: '/api/logs', 
+      disableConsoleLogging: false,
+      timestampFormat: 'short',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
