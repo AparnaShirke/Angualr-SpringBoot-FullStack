@@ -1,0 +1,7 @@
+organization=aparnashirke-1
+projectKey=my-angular-app
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.59345
+dashboardUrl=https://sonarcloud.io/dashboard?id=my-angular-app
+ceTaskId=AZTXdwu7bs4C4GNCq8Nl
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZTXdwu7bs4C4GNCq8Nl
