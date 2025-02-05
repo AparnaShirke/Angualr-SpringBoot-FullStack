@@ -39,17 +39,17 @@ describe('CreateEmployeeComponent', () => {
   let mockRouter: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    // Create spies for the services
+   
     mockEmployeeService = jasmine.createSpyObj('EmployeeService', ['createEmployee']);
     mockLoggerService = jasmine.createSpyObj('LoggerService', ['logInfo', 'logError']);
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
-    // Provide a mock implementation for logInfo and logError
+   
     mockLoggerService.logInfo.and.callFake((message: string) => {
-      console.log('logInfo: ' + message);  // Mocked implementation
+      console.log('logInfo: ' + message);  
     });
     mockLoggerService.logError.and.callFake((message: string) => {
-      console.error('logError: ' + message);  // Mocked implementation
+      console.error('logError: ' + message);  
     });
 
     await TestBed.configureTestingModule({
@@ -85,7 +85,7 @@ describe('CreateEmployeeComponent', () => {
   });
 
   it('should navigate to employee list after successful save', () => {
-    // Mock the createEmployee method to return a successful observable
+    
     mockEmployeeService.createEmployee.and.returnValue(of({}));
     component.saveEmployee();
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/employees']);
@@ -93,7 +93,7 @@ describe('CreateEmployeeComponent', () => {
 
   it('should log error when saveEmployee fails', () => {
     const error = 'Error creating employee';
-    // Mock the createEmployee method to return an error observable
+    
     mockEmployeeService.createEmployee.and.returnValue(throwError(error));
     component.saveEmployee();
     expect(mockLoggerService.logError).toHaveBeenCalledWith('Error creating employee: ' + error);
@@ -102,7 +102,7 @@ describe('CreateEmployeeComponent', () => {
   it('should call logInfo on form submit with employee data', () => {
     const employeeData = { name: 'John', role: 'Developer' };
     component.employee = employeeData as any;
-    // Mock the createEmployee method to return a successful observable
+    
     mockEmployeeService.createEmployee.and.returnValue(of({}));
     component.onSubmit();
     expect(mockLoggerService.logInfo).toHaveBeenCalledWith('Form submitted with employee data: ' + JSON.stringify(employeeData));
