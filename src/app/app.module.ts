@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,8 @@ import { FormsModule} from '@angular/forms';
 import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component'
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { GlobalErrorHandlerService } from './services/global-error-handler.service'; 
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
       timestampFormat: 'short',
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorHandler, 
+      useClass: GlobalErrorHandlerService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

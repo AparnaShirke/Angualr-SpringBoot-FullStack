@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+<!-- <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <ul class = "navbar-nav">
         <li class = "nav-item">
             <a routerLink="employees" routerLinkActive="active" class="nav-link" >Employee List</a>
@@ -14,5 +14,41 @@
     <span>{{title}} app is running!</span>
 </div>
 <div class = "container">
+    <router-outlet></router-outlet>
+</div> -->
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <div class="container">
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a routerLink="/employees" routerLinkActive="active" 
+                       [routerLinkActiveOptions]="{ exact: true }" 
+                       class="nav-link">
+                        Employee List
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/create-employee" routerLinkActive="active" 
+                       [routerLinkActiveOptions]="{ exact: true }" 
+                       class="nav-link">
+                        Add Employee
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-3 text-center">
+    <h1 class="display-5">{{ title }}</h1>
+    <div class="content">
+        <span class="fs-5">{{ title }} app is running!</span>
+    </div>
+
     <router-outlet></router-outlet>
 </div>
