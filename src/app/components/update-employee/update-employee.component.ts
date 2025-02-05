@@ -61,26 +61,55 @@ export class UpdateEmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-
-    this.logger.logInfo('UpdateEmployeeComponent initialized. Fetching employee details for ID: ' + this.id);
-
-    this.employeeService.getEmployeeById(this.id).subscribe(data => {
-      this.employee = data;
-      this.logger.logInfo('Employee details successfully retrieved for ID: ' + this.id);
-    }, error => {
-      this.logger.logError('Error retrieving employee details for ID: ' + this.id + '. Error: ' + error);
-    });
+    this.id = +this.route.snapshot.params['id'];  // Convert string ID to number using + or parseInt()
+    this.logger.logInfo(`UpdateEmployeeComponent initialized. Fetching employee details for ID: ${this.id}`);
+  
+    this.employeeService.getEmployeeById(this.id).subscribe(
+      (employee) => {
+        this.employee = employee;
+        this.logger.logInfo(`Employee details successfully retrieved for ID: ${this.id}`);
+      },
+      (error) => {
+        this.logger.logError(`Error retrieving employee details for ID: ${this.id}. Error: ${error}`);
+      }
+    );
   }
+  
 
+  // ngOnInit(): void {
+  //   this.id = this.route.snapshot.params['id'];
+
+  //   this.logger.logInfo('UpdateEmployeeComponent initialized. Fetching employee details for ID: ' + this.id);
+
+  //   this.employeeService.getEmployeeById(this.id).subscribe(data => {
+  //     this.employee = data;
+  //     this.logger.logInfo('Employee details successfully retrieved for ID: ' + this.id);
+  //   }, error => {
+  //     this.logger.logError('Error retrieving employee details for ID: ' + this.id + '. Error: ' + error);
+  //   });
+  // }
+
+  // onSubmit(): void {
+  //   this.logger.logInfo('Updating employee with ID: ' + this.id);
+
+  //   this.employeeService.updateEmployee(this.id, this.employee).subscribe(data => {
+  //     this.logger.logInfo('Employee with ID: ' + this.id + ' successfully updated');
+  //     this.goToEmployeeList();
+  //   }, error => {
+  //     this.logger.logError('Error updating employee with ID: ' + this.id + '. Error: ' + error);
+  //   });
+  // }
   onSubmit(): void {
     this.logger.logInfo('Updating employee with ID: ' + this.id);
-
+  
     this.employeeService.updateEmployee(this.id, this.employee).subscribe(data => {
       this.logger.logInfo('Employee with ID: ' + this.id + ' successfully updated');
       this.goToEmployeeList();
     }, error => {
-      this.logger.logError('Error updating employee with ID: ' + this.id + '. Error: ' + error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      // this.logger.logError(`Error updating employee with ID: ${this.id}. Error: ${errorMessage}`);
+      this.logger.logError(`Error updating employee with ID: ${this.id}. Error: ${error}`);
+
     });
   }
 
