@@ -3,5 +3,5 @@ projectKey=my-angular-app
 serverUrl=https://sonarcloud.io
 serverVersion=8.0.0.59345
 dashboardUrl=https://sonarcloud.io/dashboard?id=my-angular-app
-ceTaskId=AZTXlGpyBeejJeyZP3Nf
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZTXlGpyBeejJeyZP3Nf
+ceTaskId=AZTZlANOaBUAM-IVn3dV
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZTZlANOaBUAM-IVn3dV
