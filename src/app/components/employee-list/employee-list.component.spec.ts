@@ -283,7 +283,7 @@ describe('EmployeeListComponent', () => {
     mockLoggerService = jasmine.createSpyObj('LoggerService', ['logInfo', 'logError', 'logWarn']);
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
 
-    // Mock the getEmployeesList method to return an observable
+    
     mockEmployeeService.getEmployeesList.and.returnValue(of(mockEmployees));
 
     TestBed.configureTestingModule({
@@ -321,28 +321,18 @@ describe('EmployeeListComponent', () => {
   });
 
   it('should fetch employees on getEmployees call', () => {
-    // Explicitly set the mock for getEmployeesList
+   
     mockEmployeeService.getEmployeesList.and.returnValue(of(mockEmployees));
 
     component.getEmployees();
 
-    // Detect changes to ensure component state is updated
+    
     fixture.detectChanges();
 
     expect(component.employees).toEqual(mockEmployees);
     expect(mockLoggerService.logInfo).toHaveBeenCalledWith('Fetched employee list', mockEmployees);
   });
 
-  // it('should log error if fetching employees fails', () => {
-  //   const mockError = new Error('Failed to fetch employees');
-  //   mockEmployeeService.getEmployeesList.and.returnValue(throwError(() => mockError));
-
-  //   component.getEmployees();
-
-  //   fixture.detectChanges();
-
-  //   expect(mockLoggerService.logError).toHaveBeenCalledWith('Error fetching employee list', mockError);
-  // });
   it('should log error if fetching employees fails', () => {
     const mockError = new Error('Failed to fetch employees');
     mockEmployeeService.getEmployeesList.and.returnValue(throwError(mockError));
@@ -367,7 +357,7 @@ describe('EmployeeListComponent', () => {
   });
 
   it('should delete employee and refresh list when deleteEmployee is called', () => {
-    // Ensure deleteEmployee is called and the list is refreshed after deletion
+   
     mockEmployeeService.getEmployeesList.and.returnValue(of(mockEmployees));
     mockEmployeeService.deleteEmployee.and.returnValue(of(null));
 
@@ -379,17 +369,6 @@ describe('EmployeeListComponent', () => {
     expect(mockLoggerService.logInfo).toHaveBeenCalledWith('Deleted employee with ID: 1');
     expect(mockEmployeeService.getEmployeesList).toHaveBeenCalled();
   });
-
-  // it('should log error if deleting employee fails', () => {
-  //   const mockError = new Error('Failed to delete employee');
-  //   mockEmployeeService.deleteEmployee.and.returnValue(throwError(() => mockError));
-
-  //   component.deleteEmployee(1);
-
-  //   fixture.detectChanges();
-
-  //   expect(mockLoggerService.logError).toHaveBeenCalledWith('Error deleting employee with ID: 1', mockError);
-  // });
 
   it('should log error if deleting employee fails', () => {
     const mockError = new Error('Failed to delete employee');

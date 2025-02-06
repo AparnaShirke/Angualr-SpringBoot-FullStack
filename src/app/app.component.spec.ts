@@ -42,7 +42,7 @@ import { NGXLogger, LoggerConfig, LoggerModule, NgxLoggerLevel } from 'ngx-logge
 
 class MockLoggerService {
   logInfo(message: string) {
-    // Mock the logInfo method
+    
     console.log(message);
   }
 }
@@ -63,7 +63,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         { provide: LoggerService, useClass: MockLoggerService }, 
-        NGXLogger,  // Provide NGXLogger
+        NGXLogger, 
         {
           provide: LoggerConfig,
           useValue: {

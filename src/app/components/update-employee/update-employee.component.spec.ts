@@ -282,26 +282,26 @@ describe('UpdateEmployeeComponent', () => {
 
  
   it('should handle error if fetching employee details fails', () => {
-    mockActivatedRoute.snapshot.params = { id: '1' };  // Simulating route param as string
+    mockActivatedRoute.snapshot.params = { id: '1' }; 
     const mockError = new Error('Failed to fetch employee details');
-    mockEmployeeService.getEmployeeById.and.returnValue(throwError(mockError)); // Mock an error response
+    mockEmployeeService.getEmployeeById.and.returnValue(throwError(mockError));
   
-    component.ngOnInit();  // Call ngOnInit which should trigger the error
+    component.ngOnInit();
   
-    expect(mockEmployeeService.getEmployeeById).toHaveBeenCalledWith(1);  // Now ensuring the ID passed is a number
+    expect(mockEmployeeService.getEmployeeById).toHaveBeenCalledWith(1);
     expect(mockLoggerService.logError).toHaveBeenCalledWith('Error retrieving employee details for ID: 1. Error: Error: Failed to fetch employee details');
   });
   
   
   it('should update employee and navigate to employee list', () => {
     const mockEmployee = new Employee('John', 'Doe', 'john.doe@example.com', 1);
-    mockEmployeeService.updateEmployee.and.returnValue(of(mockEmployee));  // Mock successful update
-    component.id = 1;  // Set ID as number
+    mockEmployeeService.updateEmployee.and.returnValue(of(mockEmployee)); 
+    component.id = 1;  
     component.employee = mockEmployee;
 
-    component.onSubmit();  // Call onSubmit which should update the employee and navigate
+    component.onSubmit(); 
 
-    expect(mockEmployeeService.updateEmployee).toHaveBeenCalledWith(1, mockEmployee);  // Ensure updateEmployee is called with correct params
+    expect(mockEmployeeService.updateEmployee).toHaveBeenCalledWith(1, mockEmployee);  
     expect(mockLoggerService.logInfo).toHaveBeenCalledWith('Employee with ID: 1 successfully updated');
     expect(mockLoggerService.logInfo).toHaveBeenCalledWith('Navigating to employee list after update');
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/employees']);
@@ -309,13 +309,13 @@ describe('UpdateEmployeeComponent', () => {
 
   it('should handle error if updating employee fails', () => {
     const mockEmployee = new Employee('John', 'Doe', 'john.doe@example.com', 1);
-    mockEmployeeService.updateEmployee.and.returnValue(throwError(new Error('Failed to update employee'))); // Mock an error response
-    component.id = 1;  // Set ID as number
+    mockEmployeeService.updateEmployee.and.returnValue(throwError(new Error('Failed to update employee'))); 
+    component.id = 1;  
     component.employee = mockEmployee;
 
-    component.onSubmit();  // Call onSubmit which should trigger the error
+    component.onSubmit(); 
 
-    expect(mockEmployeeService.updateEmployee).toHaveBeenCalledWith(1, mockEmployee);  // Ensure updateEmployee is called with correct params
+    expect(mockEmployeeService.updateEmployee).toHaveBeenCalledWith(1, mockEmployee); 
     expect(mockLoggerService.logError).toHaveBeenCalledWith('Error updating employee with ID: 1. Error: Error: Failed to update employee');
   });
 });
